@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const results = document.getElementById("results");
   const resultsContent = document.getElementById("results-content");
 
+  // Set initial values for the display spans
+  matrixSizeValue.textContent = matrixSizeInput.value;
+  iterationsValue.textContent = iterationsInput.value;
+
   // Update displayed values when sliders change
   matrixSizeInput.addEventListener("input", function () {
     matrixSizeValue.textContent = this.value;
