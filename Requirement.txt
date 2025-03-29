@@ -1,0 +1,50 @@
+Testing Scenarios
+To ensure the Kubernetes deployment is working as expected, perform the following test
+cases:
+1. Application Availability Tests
+✅ Test: Check if the application is accessible via the Kubernetes service.
+🔹 Command:
+minikube kubectl get services
+curl http://<EXTERNAL-IP>:<PORT>
+🔹 Expected Output: Should return the homepage or API response of the application.
+2. Scaling Tests
+✅ Test: Trigger high CPU usage to see if the Horizontal Pod Autoscaler (HPA) scales up
+pods.
+🔹 Command:
+minikube kubectl get hpa
+minikube kubectl run --rm -it --image=busybox stress-test -- /bin/sh
+Inside BusyBox shell:
+while true; do wget -q -O- http://<SERVICE-IP>:<PORT>; done
+🔹 Expected Output: Number of pods should increase dynamically.
+🔹 Verification:
+minikube kubectl get pods -w
+3. Rolling Update & Rollback Test
+✅ Test: Perform a rolling update and verify zero downtime.
+🔹 Command:
+minikube kubectl set image deployment/<DEPLOYMENT_NAME> <CONTAINER_NAME>=new-
+image:v2
+🔹 Expected Output: New version is deployed while keeping the app running.✅ Test: Rollback to the previous version in case of failure.
+🔹 Command:
+minikube kubectl rollout undo deployment/<DEPLOYMENT_NAME>
+🔹 Expected Output: Application reverts to the previous working version.
+4. Pod Failure and Self-Healing Test
+✅ Test: Manually delete a pod and check if Kubernetes automatically recreates it.
+🔹 Command:
+minikube kubectl delete pod <POD_NAME>
+🔹 Expected Output: A new pod should be automatically created.
+🔹 Verification:
+minikube kubectl get pods -w
+5. Persistent Storage Test (If Implemented)
+✅ Test: Verify if data persists after pod restart.
+🔹 Steps:
+Store data in the mounted volume inside the pod.
+Delete the pod and check if data is retained.
+🔹 Command:
+minikube kubectl delete pod <POD_NAME>
+minikube kubectl get pods -w
+🔹 Expected Output: New pod should start with the same data.
+6. Logging Test
+✅ Test: Check if application logs are available.
+🔹 Command:
+minikube kubectl logs <POD_NAME>
+🔹 Expected Output: Should display application logs.
