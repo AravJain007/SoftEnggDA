@@ -9,7 +9,7 @@ if minikube status &>/dev/null; then
   echo "Minikube is already running. Using existing cluster."
 else
   # Start Minikube with 3 nodes
-  minikube start --nodes=3 --cpus=2 --memory=2048 --mount-string="/data/chatbot:/data/chatbot" --mount
+  minikube start --nodes=3 --cpus=2 --memory=2048
 fi
 
 echo "====== Verifying cluster status ======"
@@ -17,7 +17,7 @@ minikube kubectl get nodes
 
 echo "====== Preparing persistent storage directories ======"
 # Create directory for persistent storage on the host
-minikube ssh "sudo mkdir -p /data/chatbot && sudo chmod 777 /data/chatbot"
+minikube ssh "sudo mkdir -p /tmp/chatbot-data && sudo chmod 777 /tmp/chatbot-data"
 
 echo "====== Building Docker image ======"
 # Build the image locally

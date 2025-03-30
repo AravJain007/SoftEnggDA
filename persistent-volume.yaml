@@ -10,7 +10,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
-    path: "/data/chatbot"
+    path: "/tmp/chatbot-data"
     type: DirectoryOrCreate
 ---
 apiVersion: v1
