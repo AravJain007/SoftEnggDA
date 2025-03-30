@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const progressBarFill = document.getElementById("progress-bar-fill");
   const results = document.getElementById("results");
   const resultsContent = document.getElementById("results-content");
+  const statusMessage = document.getElementById("status-message");
 
   // Set initial values for the display spans
   matrixSizeValue.textContent = matrixSizeInput.value;
@@ -33,6 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
     results.classList.add("hidden");
     runButton.disabled = true;
 
+    // Reset progress bar
+    progressBarFill.style.width = "0%";
+
     // Fake progress update (since we don't have real-time updates from the backend)
     let progress = 0;
     const progressInterval = setInterval(() => {
@@ -52,10 +56,19 @@ document.addEventListener("DOMContentLoaded", function () {
         iterations: iterations,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
         // Clear any existing results
         resultsContent.innerHTML = "";
+
+        // Update status message
+        statusMessage.textContent = `Matrix multiplication completed for ${iterations} iterations with matrix size ${matrixSize}x${matrixSize}`;
+        statusMessage.className = "success";
 
         // Add results to the results div
         const resultList = document.createElement("ul");
@@ -66,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }: ${result.time.toFixed(2)} seconds`;
           resultList.appendChild(item);
         });
+
         resultsContent.appendChild(resultList);
 
         // Show results, hide progress
@@ -79,8 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => {
         console.error("Error:", error);
-        resultsContent.innerHTML =
-          '<p class="error">Error running matrix multiplication. Please try again.</p>';
+        statusMessage.textContent =
+          "Error running matrix multiplication. Please try again.";
+        statusMessage.className = "error";
+        resultsContent.innerHTML = "";
 
         // Show results, hide progress
         clearInterval(progressInterval);

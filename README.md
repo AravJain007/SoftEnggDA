@@ -2,6 +2,10 @@
 
 A containerized Python application for high-performance matrix multiplication with Kubernetes deployment on Minikube, featuring auto-scaling, persistent storage, and comprehensive testing.
 
+## Video Link
+
+[Google Drive Link](https://drive.google.com/file/d/1R53mqZut3Z1UG83bQXn8vFvVVBrj6HxL/view?usp=sharing)
+
 ## Project Overview
 
 This project demonstrates deploying a CPU-intensive matrix multiplication application on Kubernetes with:

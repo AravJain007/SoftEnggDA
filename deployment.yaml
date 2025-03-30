@@ -1,29 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chatbot-deployment
+  name: matrix-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: chatbot
+      app: matrix
   template:
     metadata:
       labels:
-        app: chatbot
+        app: matrix
     spec:
       containers:
-        - name: chatbot
+        - name: matrix
           image: chatbot:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8501
-          env:
-            - name: GROQ_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: groq-api-key
-                  key: GROQ_API_KEY
           resources:
             requests:
               cpu: "100m"
@@ -35,4 +29,4 @@ spec:
       volumes:
         - name: data-volume
           persistentVolumeClaim:
-            claimName: chatbot-pvc
+            claimName: matrix-pvc

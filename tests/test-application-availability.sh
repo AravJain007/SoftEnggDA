@@ -5,7 +5,7 @@ echo "Getting service information..."
 minikube kubectl get services
 
 # Get the service URL
-SERVICE_URL=$(minikube service chatbot-service --url)
+SERVICE_URL=$(minikube service matrix-service --url)
 echo "Service URL: $SERVICE_URL"
 
 echo "Testing application accessibility..."

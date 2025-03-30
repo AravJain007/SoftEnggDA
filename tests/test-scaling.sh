@@ -3,7 +3,7 @@
 echo "====== Flask App Load Test ======"
 
 # Get the service IP and port
-SERVICE_NAME="chatbot-service"
+SERVICE_NAME="matrix-service"
 CLUSTER_IP=$(minikube kubectl -- get service $SERVICE_NAME -o jsonpath='{.spec.clusterIP}')
 SERVICE_PORT=$(minikube kubectl -- get service $SERVICE_NAME -o jsonpath='{.spec.ports[0].port}')
 TARGET="http://$CLUSTER_IP:$SERVICE_PORT/"
@@ -43,4 +43,4 @@ spec:
 EOF
 
 echo "Watching scaling behavior (Ctrl+C to stop)..."
-minikube kubectl -- get hpa chatbot-hpa --watch 
+minikube kubectl -- get hpa matrix-hpa --watch 

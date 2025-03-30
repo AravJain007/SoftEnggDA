@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: chatbot-pv
+  name: matrix-pv
 spec:
   capacity:
     storage: 1Gi
@@ -10,13 +10,13 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
   hostPath:
-    path: "/tmp/chatbot-data"
+    path: "/tmp/matrix-data"
     type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: chatbot-pvc
+  name: matrix-pvc
 spec:
   accessModes:
     - ReadWriteOnce

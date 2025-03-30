@@ -6,7 +6,7 @@ echo "Current pods:"
 minikube kubectl -- get pods
 
 # Get the first pod name
-POD_NAME=$(minikube kubectl -- get pods -l app=chatbot -o jsonpath='{.items[0].metadata.name}')
+POD_NAME=$(minikube kubectl -- get pods -l app=matrix -o jsonpath='{.items[0].metadata.name}')
 echo "Deleting pod: $POD_NAME"
 
 # Delete the pod

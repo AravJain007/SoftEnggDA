@@ -21,15 +21,26 @@ h1 {
 
 .control-group {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 input[type="range"] {
   width: 100%;
+  margin-bottom: 5px;
+}
+
+/* Style for the value display */
+#matrix-size-value,
+#iterations-value {
+  font-weight: bold;
+  align-self: flex-end;
 }
 
 button {
@@ -41,10 +52,16 @@ button {
   border-radius: 4px;
   font-size: 16px;
   width: 100%;
+  transition: background-color 0.3s;
 }
 
 button:hover {
   background-color: #2980b9;
+}
+
+button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
 }
 
 .progress-bar {
@@ -53,6 +70,7 @@ button:hover {
   border-radius: 4px;
   margin: 10px 0;
   overflow: hidden;
+  border: 1px solid #ddd;
 }
 
 #progress-bar-fill {
@@ -68,11 +86,35 @@ button:hover {
 
 #results {
   margin-top: 20px;
-  padding: 10px;
+  padding: 15px;
   background-color: #f8f9fa;
   border-radius: 4px;
+  border: 1px solid #e9ecef;
+}
+
+#results h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+#status-message {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.success {
+  color: #27ae60;
+}
+
+.error {
+  color: #e74c3c;
+  font-weight: bold;
 }
 
 #results-content {
   margin-top: 10px;
+}
+
+#results-content ul {
+  padding-left: 20px;
 }

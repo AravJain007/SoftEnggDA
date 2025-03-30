@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: chatbot-hpa
+  name: matrix-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: chatbot-deployment
+    name: matrix-deployment
   minReplicas: 2
   maxReplicas: 5
   metrics:

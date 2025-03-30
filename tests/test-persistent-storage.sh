@@ -3,17 +3,17 @@
 echo "====== Test 5: Persistent Storage Test ======"
 
 # Get a pod name
-POD_NAME=$(minikube kubectl -- get pods --selector=app=chatbot -o jsonpath='{.items[0].metadata.name}')
+POD_NAME=$(minikube kubectl -- get pods --selector=app=matrix -o jsonpath='{.items[0].metadata.name}')
 echo "Using pod: $POD_NAME"
 
 # Check if pod was found
 if [ -z "$POD_NAME" ]; then
-  echo "Error: No pod with label app=chatbot was found!"
+  echo "Error: No pod with label app=matrix was found!"
   exit 1
 fi
 
 # Get service URL
-SERVICE_URL=$(minikube service chatbot-service --url)
+SERVICE_URL=$(minikube service matrix-service --url)
 echo "Service URL: $SERVICE_URL"
 
 echo "Checking if test file exists in the persistent volume..."
@@ -27,12 +27,12 @@ echo "Waiting for a new pod to be created..."
 sleep 30  # Give enough time for the new pod to be ready
 
 # Get the new pod name
-NEW_POD_NAME=$(minikube kubectl -- get pods --selector=app=chatbot -o jsonpath='{.items[0].metadata.name}')
+NEW_POD_NAME=$(minikube kubectl -- get pods --selector=app=matrix -o jsonpath='{.items[0].metadata.name}')
 echo "New pod created: $NEW_POD_NAME"
 
 # Check if new pod was found
 if [ -z "$NEW_POD_NAME" ]; then
-  echo "Error: No new pod was created with label app=chatbot!"
+  echo "Error: No new pod was created with label app=matrix!"
   exit 1
 fi
 
